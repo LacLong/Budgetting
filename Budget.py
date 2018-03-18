@@ -3,7 +3,7 @@ import sqlite3
 import sys
 from tkinter import*
 from tkinter import messagebox
-
+from datetime import datetime
 
 # print program title
 programTitle = 'BUDGETING PROGRAM'
@@ -77,10 +77,14 @@ class mainMenuWindow(object):
 
     def submit_data(self):
         ''' build the query and submit data'''
+
+        # get user inpunt date 
+        #str_d = self.trans_date.get()
+        month, day, year = map(int, self.trans_date.get().split('/'))
         try:
             transaction_type = self.trans_type.get()
             transaction_amount = ('{:.2f}'.format(float(self.amount.get())))
-            transaction_date = (''date(self.trans_date.get()))
+            transaction_date = datetime(year,month,day)
         except:
             messagebox.showerror("User Input Error", "Invalid field input!")
             return None
